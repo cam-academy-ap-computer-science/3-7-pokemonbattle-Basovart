@@ -15,7 +15,9 @@ public class PokemonBattle {
 	static Scanner userInput = new Scanner (System.in);
 	public static void main(String[] args) {
 		String name = battleStart();
-		damage(name);
+		int newHP = damage(name);
+		statsTable(name, newHP);
+		
 	}
 		
 
@@ -28,23 +30,42 @@ public class PokemonBattle {
 		System.out.println("It's a Pokemon battle between Zebstrika and " + Pokename + "! Go!");
 		return Pokename;
 	}
-	public static void damage(String name) {
+	public static int damage(String name) {
 		System.out.println("Zebstrika used Thunderbolt!");
-		System.out.println("Trainer, what are your " + name + " stats?");
+		System.out.println("Trainer, what are your " + name + "'s stats?");
 		System.out.print("Level: ");
-		String Level = userInput.nextLine();
+		int Level = userInput.nextInt();
 		System.out.print("Attack: ");
-		String Attack = userInput.nextLine();
+		int Attack = userInput.nextInt();
 		System.out.print("Defense: ");
-		String Defense = userInput.nextLine();
+		int Defense = userInput.nextInt();
 		System.out.print("Base: ");
-		String Base = userInput.nextLine();
+		int Base = userInput.nextInt();
 		System.out.print("STAB: ");
-		String STAB = userInput.nextLine();
+		int STAB = userInput.nextInt();
 		System.out.print("HP: ");
-		String HP = userInput.nextLine();
+		int HP = userInput.nextInt();
+		System.out.println();
+		double Modifier = (0.85 + (Math.random() * 0.15)) * STAB; 
+		int Damage = (int)((((2 * Level + 10) / (250)) + ((Attack / Defense) * Base) + 2) * Modifier);
+		System.out.print("Alakazam sustained " + Damage + " points of damage.");
+		int newHP = HP - 10;
+		System.out.println("HP, after damage, are now" + newHP);
+		return newHP;
 	}
-	public static void statsTable(int Level, int Attack, int HP) {
-		
+	public static void statsTable(String name, int newHP) {
+		System.out.println("Name	  " + name);
+		System.out.println("Level	  70");
+		System.out.println("------------------------------"); 
+		System.out.println("HP	  " + newHP);
+		System.out.println("ATTACK	  52");
+		System.out.println("DEFENSE   51");
+		System.out.println("SP. ATK   121");
+		System.out.println("SP. DEF   81");
+		System.out.println("SPEED 	  107");
+		System.out.println("------------------------------"); 
 	}
+
+	
 }
+
